@@ -58,7 +58,7 @@ body{min-height:100vh;background:var(--cream)}
 #p3{flex-direction:column;background:var(--cream)}
 .poster-wrap{position:relative;width:100%}
 .poster-wrap img{width:100%;display:block}
-.poster-label{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(61,31,15,.6);color:#fff;font-size:12px;letter-spacing:.12em;padding:5px 16px;border-radius:20px;white-space:nowrap;z-index:1}
+.poster-label{display:block;text-align:center;background:rgba(61,31,15,.6);color:#fff;font-size:12px;letter-spacing:.12em;padding:7px 16px;white-space:nowrap}
 .scroll-hint{text-align:center;padding:12px;font-size:12px;color:var(--brown);opacity:.5;animation:bob 1.8s infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
 .card-wrap img{width:100%;display:block}
@@ -124,13 +124,13 @@ body{min-height:100vh;background:var(--cream)}
 <div class="page" id="p3">
   <div class="poster-wrap">
     <img src="map.png" alt="厦门遇见珠绣地图海报" onerror="this.outerHTML='<div class=\'img-placeholder\' style=\'min-height:300px\'>地图海报 map.png</div>'">
-    <div class="poster-label">📍 厦门遇见珠绣 · 集章地图</div>
-    <!-- 活动背景文案 -->
-    <div style="padding:18px 20px 14px;background:var(--cream)">
-      <p style="font-size:13px;color:var(--brown);line-height:1.9;text-align:center;letter-spacing:.04em">
-        一颗珠，一针绣，藏进厦门的每一处角落。<br>跟着地图走过六处地标，遇见国家级非遗厦门珠绣。
-      </p>
-    </div>
+  </div>
+  <!-- 活动背景文案 -->
+  <div style="padding:16px 24px 14px;background:var(--cream);text-align:center">
+    <p style="font-size:11px;color:var(--gold);letter-spacing:.2em;margin-bottom:6px">📍 厦门遇见珠绣 · 集章地图</p>
+    <p style="font-size:13px;color:var(--brown);line-height:1.9;letter-spacing:.04em">
+      一颗珠，一针绣，藏进厦门的每一处角落。<br>跟着地图走过六处地标，遇见国家级非遗厦门珠绣。
+    </p>
   </div>
   <div class="scroll-hint">▼ 下滑查看集章卡</div>
   <div class="card-wrap">
