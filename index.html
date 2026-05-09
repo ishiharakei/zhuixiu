@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>遇见珠绣·集章活动</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--cream:#f5f0e8;--brown:#6b3a2a;--gold:#c8973a;--deep:#3d1f0f}
+html{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--cream)}
+body{min-height:100vh;background:var(--cream)}
+
+/* ── PAGE SYSTEM ── */
+.page{display:none;min-height:100vh}
+.page.active{display:flex}
+
+/* ── PAGE 1: ENVELOPE ── */
+#p1{align-items:center;justify-content:center;flex-direction:column;background:var(--cream)}
+.hint{font-size:13px;color:var(--brown);opacity:.6;margin-bottom:28px;letter-spacing:.1em;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.9}}
+
+.envelope-wrap{cursor:pointer;user-select:none}
+.envelope-wrap:active .envelope{transform:scale(.95)}
+.envelope{width:220px;height:155px;position:relative;transition:transform .15s}
+
+.env-body{position:absolute;inset:0;border-radius:4px;background:linear-gradient(160deg,#e8d9c0,#d4c4a0);box-shadow:0 8px 32px rgba(107,58,42,.25)}
+.env-body::after{content:"";position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(175deg,#cdb98a,#b8a070);clip-path:polygon(0 100%,50% 0,100% 100%)}
+.env-left{position:absolute;top:0;left:0;width:50%;height:100%;overflow:hidden}
+.env-left::before{content:"";position:absolute;inset:0;background:#c4aa80;clip-path:polygon(0 0,0 100%,100% 50%)}
+.env-right{position:absolute;top:0;right:0;width:50%;height:100%;overflow:hidden}
+.env-right::before{content:"";position:absolute;inset:0;background:#bda070;clip-path:polygon(100% 0,100% 100%,0 50%)}
+
+.env-flap{position:absolute;top:0;left:0;right:0;height:55%;transform-origin:top center;transition:transform .7s cubic-bezier(.4,0,.2,1);z-index:10}
+.env-flap-inner{width:100%;height:100%;background:linear-gradient(180deg,#dcc99a,#c8b080);clip-path:polygon(0 0,100% 0,50% 100%)}
+.envelope-wrap.open .env-flap{transform:rotateX(-180deg)}
+
+.seal{position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;z-index:20;background:radial-gradient(circle at 40% 35%,#b03a2e,#7b1f18);box-shadow:0 2px 8px rgba(100,0,0,.4);display:flex;align-items:center;justify-content:center;font-size:20px;transition:opacity .3s .4s}
+.envelope-wrap.open .seal{opacity:0}
+
+.pearls{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);display:flex;gap:5px}
+.pearl{width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#d4c9e0);box-shadow:0 1px 3px rgba(0,0,0,.2)}
+
+/* ── PAGE 2: LETTER ── */
+#p2{align-items:center;justify-content:center;background:rgba(61,31,15,.75);backdrop-filter:blur(4px)}
+.letter{width:min(88vw,340px);background:var(--cream);border:2px solid var(--gold);border-radius:4px;padding:28px 24px 24px;position:relative;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,.3);animation:riseUp .5s ease}
+@keyframes riseUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.letter::before{content:"";position:absolute;inset:7px;border:1px solid var(--gold);opacity:.35;border-radius:2px;pointer-events:none}
+.letter-badge{width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#b03a2e,#7b1f18);margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.letter-sub{font-size:11px;color:var(--gold);letter-spacing:.2em;margin-bottom:6px}
+.letter-title{font-size:20px;font-weight:700;color:var(--deep);margin-bottom:14px;line-height:1.4}
+.letter-divider{width:60px;height:1px;background:var(--gold);margin:0 auto 14px;opacity:.6}
+.letter-body{font-size:13px;color:var(--brown);line-height:2;margin-bottom:20px}
+.letter-body strong{color:var(--deep)}
+.letter-btn{display:inline-block;padding:11px 30px;background:linear-gradient(135deg,var(--gold),#a8762a);color:#fff;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;border:none;letter-spacing:.05em;box-shadow:0 4px 14px rgba(200,151,58,.4)}
+.letter-btn:active{opacity:.85}
+
+/* ── PAGE 3: ACTIVITY ── */
+#p3{flex-direction:column;background:var(--cream)}
+.poster-wrap{position:relative;width:100%}
+.poster-wrap img{width:100%;display:block}
+.poster-label{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(61,31,15,.6);color:#fff;font-size:12px;letter-spacing:.12em;padding:5px 16px;border-radius:20px;white-space:nowrap}
+.scroll-hint{text-align:center;padding:12px;font-size:12px;color:var(--brown);opacity:.5;animation:bob 1.8s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+.card-wrap img{width:100%;display:block}
+.pearl-row{display:flex;justify-content:center;gap:5px;padding:12px 0;background:var(--cream)}
+.pearl-row .pearl{width:8px;height:8px}
+
+.xhs-section{padding:36px 24px 52px;text-align:center;background:linear-gradient(180deg,var(--cream),#ede4d3)}
+.xhs-eyebrow{font-size:11px;letter-spacing:.25em;color:var(--gold);margin-bottom:8px}
+.xhs-title{font-size:20px;font-weight:700;color:var(--deep);margin-bottom:8px}
+.xhs-sub{font-size:13px;color:var(--brown);line-height:1.8;margin-bottom:22px}
+.xhs-card{background:#fff;border-radius:12px;padding:18px;display:flex;align-items:center;gap:14px;box-shadow:0 4px 20px rgba(107,58,42,.1);margin-bottom:20px;text-align:left}
+.xhs-avatar{width:54px;height:54px;border-radius:50%;flex-shrink:0;border:2px solid var(--gold);background:#eee;display:flex;align-items:center;justify-content:center;font-size:22px}
+.xhs-name{font-size:15px;font-weight:700;color:var(--deep);margin-bottom:3px}
+.xhs-id{font-size:12px;color:#999}
+.xhs-desc{font-size:12px;color:var(--brown);margin-top:4px;line-height:1.6}
+.xhs-btn{width:100%;padding:13px;background:linear-gradient(135deg,#ff4060,#e02040);color:#fff;border-radius:30px;font-size:15px;font-weight:600;cursor:pointer;border:none;box-shadow:0 4px 16px rgba(255,64,96,.3);display:flex;align-items:center;justify-content:center;gap:8px}
+.xhs-btn:active{opacity:.88}
+.xhs-note{font-size:11px;color:#aaa;margin-top:12px;line-height:1.8}
+
+/* image placeholders */
+.img-placeholder{width:100%;background:linear-gradient(135deg,#d4c090,#b09060);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;min-height:220px}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: 信封 -->
+<div class="page active" id="p1">
+  <p class="hint">点击信封开启邀请</p>
+  <div class="envelope-wrap" id="envWrap">
+    <div class="envelope">
+      <div class="env-body"></div>
+      <div class="env-left"></div>
+      <div class="env-right"></div>
+      <div class="env-flap"><div class="env-flap-inner"></div></div>
+      <div class="seal">🪡</div>
+      <div class="pearls">
+        <div class="pearl"></div><div class="pearl"></div><div class="pearl"></div>
+        <div class="pearl"></div><div class="pearl"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2: 邀请函 -->
+<div class="page" id="p2">
+  <div class="letter">
+    <div class="letter-badge">🪡</div>
+    <div class="letter-sub">「遇见珠绣」</div>
+    <div class="letter-title">集章活动邀请函</div>
+    <div class="letter-divider"></div>
+    <div class="letter-body">
+      邀请您探寻厦门非遗之美<br>
+      走访<strong>六处地标</strong>，收集珠绣印章<br><br>
+      集齐两枚 → 获得<strong>刺绣贴一个</strong><br>
+      集齐六枚 → 换<strong>全套精美礼品</strong><br><br>
+      数量有限，先到先得！
+    </div>
+    <button class="letter-btn" id="enterBtn">开始集章之旅 →</button>
+  </div>
+</div>
+
+<!-- PAGE 3: 活动页 -->
+<div class="page" id="p3">
+  <div class="poster-wrap">
+    <img src="map.png" alt="厦门遇见珠绣地图海报" onerror="this.outerHTML='<div class=\'img-placeholder\' style=\'min-height:300px\'>地图海报 map.png</div>'">
+    <div class="poster-label">📍 厦门遇见珠绣 · 集章地图</div>
+  </div>
+  <div class="scroll-hint">▼ 下滑查看集章卡</div>
+  <div class="card-wrap">
+    <img src="card.png" alt="集章卡" onerror="this.outerHTML='<div class=\'img-placeholder\'>集章卡 card.png</div>'">
+  </div>
+  <div class="pearl-row">
+    <div class="pearl"></div><div class="pearl"></div><div class="pearl"></div>
+    <div class="pearl"></div><div class="pearl"></div><div class="pearl"></div>
+    <div class="pearl"></div><div class="pearl"></div><div class="pearl"></div>
+  </div>
+  <div class="xhs-section">
+    <div class="xhs-eyebrow">关注领取集章卡</div>
+    <div class="xhs-title">厦门珠绣 · 扬臻艺术</div>
+    <div class="xhs-sub">关注小红书账号，凭截图至指定地点<br>即可领取集章卡，开启寻迹之旅 ✨</div>
+    <div class="xhs-card">
+      <div class="xhs-avatar"><img src="avatar.png" alt="扬臻艺术" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.outerHTML='🧵'"></div>
+      <div>
+        <div class="xhs-name">厦门珠绣-扬臻艺术</div>
+        <div class="xhs-id">小红书号：xiamenzhuxiu</div>
+        <div class="xhs-desc">国家级非物质文化遗产项目<br>厦门珠绣唯一传承保护单位</div>
+      </div>
+    </div>
+    <button class="xhs-btn" id="xhsBtn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      前往小红书关注
+    </button>
+    <div class="xhs-note">点击后将跳转至小红书<br>关注后截图，至各集章地点出示即可领卡</div>
+  </div>
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+document.getElementById('envWrap').addEventListener('click', function(){
+  this.classList.add('open');
+  setTimeout(()=> show('p2'), 750);
+});
+
+document.getElementById('enterBtn').addEventListener('click', ()=> show('p3'));
+
+document.getElementById('xhsBtn').addEventListener('click', ()=>{
+  window.open('https://xhslink.com/m/91DZHJnApJD','_blank');
+});
+</script>
+</body>
+</html>
